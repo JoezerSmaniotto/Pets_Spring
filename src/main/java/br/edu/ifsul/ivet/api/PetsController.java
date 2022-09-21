@@ -36,6 +36,19 @@ public class PetsController {
         return "Pet salvo com sucesso, ID: " + p.getId();
     }
 
+    @PutMapping("/{id}")
+    public String put(@PathVariable("id") Long id, @RequestBody Pet pet){
+        Pet p = service.update(pet, id);
+        return "Pet atualizado com sucesso, ID: " +  p.getId();
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        service.delete(id);
+        return "Pet deletado com sucesso!";
+    }
+
+
     /*@GetMapping()
     public ResponseEntity<String> getIndex() {
         return ResponseEntity.ok("Consulte a documentação da API.");

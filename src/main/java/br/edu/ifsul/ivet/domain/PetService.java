@@ -41,7 +41,32 @@ public class PetService {
         return  rep.save(pet);
     }
 
-     /*public Pet save(Pet pet) {
-        return rep.save(pet);
-    }*/
+    public Pet update(Pet pet, Long id) {
+        Assert.notNull(id,"Não foi possível atualizar o registro!");
+
+        // Busca o pet no banco de dados
+        Optional<Pet> optional = getPetById(id);
+        if(optional.isPresent()) { // Verifica se existe o Pet de acordo com o Id informado.
+            Pet db = optional.get();
+            // Copiar as propriedades
+            db.setNome(pet.getNome());
+            db.setTipo(pet.getTipo());
+            System.out.println("Pet id " + db.getId());
+
+            // Atualiza o pet
+            rep.save(db);
+
+            return db;
+        } else {
+            //return null;
+            throw new RuntimeException("Não foi possível atualizar o registro do Pet!");
+        }
+    }
+
+    public void delete(Long id) {
+        Optional<Pet> pet = getPetById(id);
+        if(pet.isPresent()) { // Só delete o pet existe aquele ID passado.
+            rep.deleteById(id);
+        }
+    }
 }
