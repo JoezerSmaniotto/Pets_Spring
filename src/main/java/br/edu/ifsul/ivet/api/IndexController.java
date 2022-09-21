@@ -7,14 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/")
+@RestController // converter essa classe em um web service.
+@RequestMapping("/") // O RequestMapping mapeia o  web service, neste caso para o  "/" raiz do projeto.
 public class IndexController {
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<String> getIndex() {
         return ResponseEntity.ok("Consulte a documentação da API.");
     }
+
+
 
     //UserDetails representa o usuário logado na sessão
     /*@GetMapping("/user/userInfo")
