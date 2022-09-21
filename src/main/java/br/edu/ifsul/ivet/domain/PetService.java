@@ -21,6 +21,10 @@ public class PetService {
         return rep.findById(id);
     }
 
+    public Iterable<Pet> getPetsByTipo(String tipo) {
+        return rep.findByTipo(tipo);
+    }
+
     public List<Pet>  getPetsFake(){
         List<Pet> pets = new ArrayList<>();
 
@@ -29,6 +33,7 @@ public class PetService {
         pets.add(new Pet(1L , "Bolinha"));
         return pets;
     }
+
 
 
 }

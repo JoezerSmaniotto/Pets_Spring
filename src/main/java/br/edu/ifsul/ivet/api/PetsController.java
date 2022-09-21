@@ -28,6 +28,11 @@ public class PetsController {
         return service.getPetById(id);
     }
 
+    @GetMapping("/tipo/{tipo}")// usa o "/" do mapeamento acima por default ao chamar essa página irá chamar o GetMapping, isso acontce pq apliquei o @GetMapping, neste caso ele herda ("/") feito no RequestMapping se eu não passar nada.
+    public Iterable<Pet> getPetsByTipo(@PathVariable("tipo") String tipo){
+        return service.getPetsByTipo(tipo);
+    }
+
     /*@GetMapping()
     public ResponseEntity<String> getIndex() {
         return ResponseEntity.ok("Consulte a documentação da API.");
