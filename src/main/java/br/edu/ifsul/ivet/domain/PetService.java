@@ -22,7 +22,7 @@ public class PetService {
         return rep.findById(id);
     }
 
-    public Iterable<Pet> getPetsByTipo(String tipo) {
+    public List<Pet> getPetsByTipo(String tipo) {
         return rep.findByTipo(tipo);
     }
 

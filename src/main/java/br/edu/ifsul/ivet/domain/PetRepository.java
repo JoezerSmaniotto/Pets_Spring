@@ -2,8 +2,10 @@ package br.edu.ifsul.ivet.domain;
 
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 public interface PetRepository extends CrudRepository<Pet, Long>{
 
 
-    Iterable<Pet> findByTipo(String tipo);
+    List<Pet> findByTipo(String tipo);
 }

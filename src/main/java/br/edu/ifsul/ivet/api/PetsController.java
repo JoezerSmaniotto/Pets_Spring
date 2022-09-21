@@ -3,6 +3,8 @@ package br.edu.ifsul.ivet.api;
 import br.edu.ifsul.ivet.domain.Pet;
 import br.edu.ifsul.ivet.domain.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,19 +17,30 @@ public class PetsController {
     private PetService service;
 
     @GetMapping()
-    public Iterable<Pet> get(){
-        return service.getPets();
+    public ResponseEntity<Iterable<Pet>> get(){
+        return ResponseEntity.ok(service.getPets()) ;
     }
 
     @GetMapping("/{id}")// usa o "/" do mapeamento acima por default ao chamar essa página irá chamar o GetMapping, isso acontce pq apliquei o @GetMapping, neste caso ele herda ("/") feito no RequestMapping se eu não passar nada.
-    public Optional<Pet> get(@PathVariable("id") Long id){
+    public ResponseEntity get(@PathVariable("id") Long id){
+        Optional<Pet> pet = service.getPetById(id);
+        //Lambda
+        return pet.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+                       // Se Existe fazer  | Não existe retorna notFound
 
-        return service.getPetById(id);
+        //return pet.isPresent() ?
+                //ResponseEntity.ok(pet.get()) : // o pet.get() é pego de dentro do optional
+                //ResponseEntity.notFound().build();
+
+
     }
 
     @GetMapping("/tipo/{tipo}")// usa o "/" do mapeamento acima por default ao chamar essa página irá chamar o GetMapping, isso acontce pq apliquei o @GetMapping, neste caso ele herda ("/") feito no RequestMapping se eu não passar nada.
-    public Iterable<Pet> getPetsByTipo(@PathVariable("tipo") String tipo){
-        return service.getPetsByTipo(tipo);
+    public ResponseEntity getPetsByTipo(@PathVariable("tipo") String tipo){
+        List<Pet>  pets = service.getPetsByTipo(tipo);
+        return pets.isEmpty() ?
+                ResponseEntity.noContent().build() :
+                ResponseEntity.ok(pets);
     }
 
     @PostMapping
