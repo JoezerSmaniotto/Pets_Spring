@@ -2,6 +2,7 @@ package br.edu.ifsul.ivet.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class PetService {
         return rep.findByTipo(tipo);
     }
 
+
     public List<Pet>  getPetsFake(){
         List<Pet> pets = new ArrayList<>();
 
@@ -34,6 +36,12 @@ public class PetService {
         return pets;
     }
 
+    public Pet insert(Pet pet) {
+        Assert.isNull(pet.getId(), "Não foi possível atualizar o registro");
+        return  rep.save(pet);
+    }
 
-
+     /*public Pet save(Pet pet) {
+        return rep.save(pet);
+    }*/
 }

@@ -3,10 +3,7 @@ package br.edu.ifsul.ivet.api;
 import br.edu.ifsul.ivet.domain.Pet;
 import br.edu.ifsul.ivet.domain.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +28,12 @@ public class PetsController {
     @GetMapping("/tipo/{tipo}")// usa o "/" do mapeamento acima por default ao chamar essa página irá chamar o GetMapping, isso acontce pq apliquei o @GetMapping, neste caso ele herda ("/") feito no RequestMapping se eu não passar nada.
     public Iterable<Pet> getPetsByTipo(@PathVariable("tipo") String tipo){
         return service.getPetsByTipo(tipo);
+    }
+
+    @PostMapping
+    public String post(@RequestBody Pet pet){
+        Pet p = service.insert(pet);
+        return "Pet salvo com sucesso, ID: " + p.getId();
     }
 
     /*@GetMapping()
