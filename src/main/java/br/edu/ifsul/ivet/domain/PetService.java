@@ -1,5 +1,6 @@
 package br.edu.ifsul.ivet.domain;
 
+import br.edu.ifsul.ivet.domain.dto.PetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -7,6 +8,7 @@ import org.springframework.util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 // Irá pegar os dados do banco de dados futuramente
 @Service
@@ -14,27 +16,31 @@ public class PetService {
     @Autowired
     private PetRepository rep; // Se Comunica com o banco de dados a interface PetRepository
 
-    public Iterable<Pet>  getPets(){
-        return rep.findAll();
+    public List<PetDTO>  getPets(){
+        // FindAll retorna lista de pets
+        // chamamos o strem para maperiar a lista
+        // Percoro pet a pet criando um petDTO
+        // Por fim gera uma nova lista de petDTO
+        return rep.findAll().stream().map(PetDTO::new).collect(Collectors.toList());
     }
 
     public Optional<Pet> getPetById(Long id) {
         return rep.findById(id);
     }
 
-    public List<Pet> getPetsByTipo(String tipo) {
-        return rep.findByTipo(tipo);
+    public List<PetDTO> getPetsByTipo(String tipo) {
+        return rep.findByTipo(tipo).stream().map(PetDTO::new).collect(Collectors.toList());
     }
 
 
-    public List<Pet>  getPetsFake(){
+    /*public List<Pet>  getPetsFake(){
         List<Pet> pets = new ArrayList<>();
 
         pets.add(new Pet(1L , "Samanta"));
         pets.add(new Pet(1L , "Bigo"));
         pets.add(new Pet(1L , "Bolinha"));
         return pets;
-    }
+    }*/
 
     public Pet insert(Pet pet) {
         Assert.isNull(pet.getId(), "Não foi possível atualizar o registro");

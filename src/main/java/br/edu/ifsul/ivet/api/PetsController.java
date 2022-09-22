@@ -2,6 +2,7 @@ package br.edu.ifsul.ivet.api;
 
 import br.edu.ifsul.ivet.domain.Pet;
 import br.edu.ifsul.ivet.domain.PetService;
+import br.edu.ifsul.ivet.domain.dto.PetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class PetsController {
     private PetService service;
 
     @GetMapping()
-    public ResponseEntity<Iterable<Pet>> get(){
+    public ResponseEntity get(){
         return ResponseEntity.ok(service.getPets()) ;// ResponseEntity.ok é statuCode 200
     }
 
@@ -35,7 +36,7 @@ public class PetsController {
 
     @GetMapping("/tipo/{tipo}")// usa o "/" do mapeamento acima por default ao chamar essa página irá chamar o GetMapping, isso acontce pq apliquei o @GetMapping, neste caso ele herda ("/") feito no RequestMapping se eu não passar nada.
     public ResponseEntity getPetsByTipo(@PathVariable("tipo") String tipo){
-        List<Pet>  pets = service.getPetsByTipo(tipo);
+        List<PetDTO>  pets = service.getPetsByTipo(tipo);
         return pets.isEmpty() ?
                 ResponseEntity.noContent().build() : // O noContent 204
                 ResponseEntity.ok(pets); // Ok é 200
