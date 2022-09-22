@@ -18,7 +18,7 @@ public class PetsController {
 
     @GetMapping()
     public ResponseEntity<Iterable<Pet>> get(){
-        return ResponseEntity.ok(service.getPets()) ;
+        return ResponseEntity.ok(service.getPets()) ;// ResponseEntity.ok é statuCode 200
     }
 
     @GetMapping("/{id}")// usa o "/" do mapeamento acima por default ao chamar essa página irá chamar o GetMapping, isso acontce pq apliquei o @GetMapping, neste caso ele herda ("/") feito no RequestMapping se eu não passar nada.
@@ -29,18 +29,16 @@ public class PetsController {
                        // Se Existe fazer  | Não existe retorna notFound
 
         //return pet.isPresent() ?
-                //ResponseEntity.ok(pet.get()) : // o pet.get() é pego de dentro do optional
+                //ResponseEntity.ok(pet.get()) : // o pet.get() é Pet que esta dentro do optional Seria assim => Pet p = pet.get();
                 //ResponseEntity.notFound().build();
-
-
     }
 
     @GetMapping("/tipo/{tipo}")// usa o "/" do mapeamento acima por default ao chamar essa página irá chamar o GetMapping, isso acontce pq apliquei o @GetMapping, neste caso ele herda ("/") feito no RequestMapping se eu não passar nada.
     public ResponseEntity getPetsByTipo(@PathVariable("tipo") String tipo){
         List<Pet>  pets = service.getPetsByTipo(tipo);
         return pets.isEmpty() ?
-                ResponseEntity.noContent().build() :
-                ResponseEntity.ok(pets);
+                ResponseEntity.noContent().build() : // O noContent 204
+                ResponseEntity.ok(pets); // Ok é 200
     }
 
     @PostMapping

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class PetService {
     @Autowired
-    private PetRepository rep;
+    private PetRepository rep; // Se Comunica com o banco de dados a interface PetRepository
 
     public Iterable<Pet>  getPets(){
         return rep.findAll();
