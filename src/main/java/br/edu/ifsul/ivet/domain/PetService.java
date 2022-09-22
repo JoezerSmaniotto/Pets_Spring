@@ -21,11 +21,19 @@ public class PetService {
         // chamamos o strem para maperiar a lista
         // Percoro pet a pet criando um petDTO
         // Por fim gera uma nova lista de petDTO
-        return rep.findAll().stream().map(PetDTO::new).collect(Collectors.toList());
+        List<PetDTO> list = rep.findAll().stream().map(PetDTO::new).collect(Collectors.toList());
+        return list;
+       // return rep.findAll().stream().map(PetDTO::new).collect(Collectors.toList());
     }
 
-    public Optional<Pet> getPetById(Long id) {
-        return rep.findById(id);
+    public Optional<PetDTO> getPetById(Long id) { // Sintaxe Resumida  = Sintaxe não resumida
+        return rep.findById(id).map(PetDTO::new); // map(PetDTO::new); == map(p -> new PetDTO(p);
+        // o findByTipo sempre retorna uma Optional, mas como quero converter para um DTO, caso a conversão com map para DTO que quero, no caso de PetDTO
+        // Se existe aquele ID ele converte, se não ele segue sendo um DTO
+
+        //Optional<Pet> pet = rep.findById(id);
+        // return pet.map(p -> Optional.of(new PetDTO(p))).orElse(null);
+
     }
 
     public List<PetDTO> getPetsByTipo(String tipo) {
@@ -51,7 +59,7 @@ public class PetService {
         Assert.notNull(id,"Não foi possível atualizar o registro!");
 
         // Busca o pet no banco de dados
-        Optional<Pet> optional = getPetById(id);
+        Optional<Pet> optional = rep.findById(id);
         if(optional.isPresent()) { // Verifica se existe o Pet de acordo com o Id informado.
             Pet db = optional.get();
             // Copiar as propriedades
@@ -70,8 +78,7 @@ public class PetService {
     }
 
     public void delete(Long id) {
-        Optional<Pet> pet = getPetById(id);
-        if(pet.isPresent()) { // Só delete o pet existe aquele ID passado.
+        if(getPetById(id).isPresent()) { // Só delete o pet existe aquele ID passado.
             rep.deleteById(id);
         }
     }
