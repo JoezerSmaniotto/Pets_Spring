@@ -21,13 +21,13 @@ public class PetService {
         // chamamos o strem para maperiar a lista
         // Percoro pet a pet criando um petDTO
         // Por fim gera uma nova lista de petDTO
-        List<PetDTO> list = rep.findAll().stream().map(PetDTO::new).collect(Collectors.toList());
+        List<PetDTO> list = rep.findAll().stream().map(PetDTO::create).collect(Collectors.toList());
         return list;
-       // return rep.findAll().stream().map(PetDTO::new).collect(Collectors.toList());
+       // return rep.findAll().stream().map(PetDTO::create).collect(Collectors.toList());
     }
 
     public Optional<PetDTO> getPetById(Long id) { // Sintaxe Resumida  = Sintaxe não resumida
-        return rep.findById(id).map(PetDTO::new); // map(PetDTO::new); == map(p -> new PetDTO(p);
+        return rep.findById(id).map(PetDTO::create); // map(PetDTO::new); == map(p -> new PetDTO(p);
         // o findByTipo sempre retorna uma Optional, mas como quero converter para um DTO, caso a conversão com map para DTO que quero, no caso de PetDTO
         // Se existe aquele ID ele converte, se não ele segue sendo um DTO
 
@@ -37,7 +37,7 @@ public class PetService {
     }
 
     public List<PetDTO> getPetsByTipo(String tipo) {
-        return rep.findByTipo(tipo).stream().map(PetDTO::new).collect(Collectors.toList());
+        return rep.findByTipo(tipo).stream().map(PetDTO::q).collect(Collectors.toList());
     }
 
 
