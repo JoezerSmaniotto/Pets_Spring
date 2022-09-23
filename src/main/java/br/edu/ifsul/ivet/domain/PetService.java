@@ -77,9 +77,11 @@ public class PetService {
         }
     }
 
-    public void delete(Long id) {
+    public boolean delete(Long id) {
         if(getPetById(id).isPresent()) { // Só delete o pet existe aquele ID passado.
             rep.deleteById(id);
+            return true;
         }
+        return false;
     }
 }

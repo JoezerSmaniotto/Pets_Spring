@@ -55,9 +55,11 @@ public class PetsController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Long id) {
-        service.delete(id);
-        return "Pet deletado com sucesso!";
+    public ResponseEntity delete(@PathVariable("id") Long id) {
+        Boolean ok = service.delete(id);
+        return ok ?
+                ResponseEntity.ok().build() : // Ok é 200
+                ResponseEntity.notFound().build(); // Ok é 404
     }
 
 
