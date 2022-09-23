@@ -37,7 +37,7 @@ public class PetService {
     }
 
     public List<PetDTO> getPetsByTipo(String tipo) {
-        return rep.findByTipo(tipo).stream().map(PetDTO::q).collect(Collectors.toList());
+        return rep.findByTipo(tipo).stream().map(PetDTO::create).collect(Collectors.toList());
     }
 
 
