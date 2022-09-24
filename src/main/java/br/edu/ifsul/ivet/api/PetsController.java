@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,9 +45,20 @@ public class PetsController {
     }
 
     @PostMapping
-    public String post(@RequestBody Pet pet){
-        Pet p = service.insert(pet);
-        return "Pet salvo com sucesso, ID: " + p.getId();
+    public ResponseEntity post(@RequestBody Pet pet){
+        try{
+            PetDTO p = service.insert(pet);
+            URI location = getUri(p.getId());
+            return ResponseEntity.created(location).build();
+        } catch (Exception ex){
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
+    private URI getUri(Long id) {
+        return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(id).toUri();
     }
 
     @PutMapping("/{id}")

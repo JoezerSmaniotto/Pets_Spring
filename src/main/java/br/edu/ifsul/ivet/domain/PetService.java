@@ -50,9 +50,9 @@ public class PetService {
         return pets;
     }*/
 
-    public Pet insert(Pet pet) {
+    public PetDTO insert(Pet pet) {
         Assert.isNull(pet.getId(), "Não foi possível atualizar o registro");
-        return  rep.save(pet);
+        return  PetDTO.create(rep.save(pet));
     }
 
     public Pet update(Pet pet, Long id) {
