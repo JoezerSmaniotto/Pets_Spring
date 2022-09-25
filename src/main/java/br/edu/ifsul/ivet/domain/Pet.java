@@ -14,7 +14,7 @@ public class Pet {
     @Id // inica q é campo de chave primaria da tabela.
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Faz com que quando salvar um novo pet, um auto incremento no id
     private Long id;
-    private  String nome;
+    private String nome;
     private String descricao;
     private String raca;
     private String urlFoto;

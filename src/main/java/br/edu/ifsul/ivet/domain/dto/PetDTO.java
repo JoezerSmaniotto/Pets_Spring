@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 @Data
 public class PetDTO {
     private Long id;
-    private  String nome;
+    private String nome;
     private String descricao;
     private String raca;
     private String urlFoto;
