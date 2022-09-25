@@ -55,7 +55,7 @@ public class PetService {
         return  PetDTO.create(rep.save(pet));
     }
 
-    public Pet update(Pet pet, Long id) {
+    public PetDTO update(Pet pet, Long id) {
         Assert.notNull(id,"Não foi possível atualizar o registro!");
 
         // Busca o pet no banco de dados
@@ -70,10 +70,10 @@ public class PetService {
             // Atualiza o pet
             rep.save(db);
 
-            return db;
+            return PetDTO.create(db);// Com o converto o Obj do tipo Pet para PetDTO com o PetDTO.create
         } else {
-            //return null;
-            throw new RuntimeException("Não foi possível atualizar o registro do Pet!");
+            return null;
+            //throw new RuntimeException("Não foi possível atualizar o registro do Pet!");
         }
     }
 

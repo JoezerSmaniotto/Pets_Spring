@@ -62,9 +62,11 @@ public class PetsController {
     }
 
     @PutMapping("/{id}")
-    public String put(@PathVariable("id") Long id, @RequestBody Pet pet){
-        Pet p = service.update(pet, id);
-        return "Pet atualizado com sucesso, ID: " +  p.getId();
+    public ResponseEntity put(@PathVariable("id") Long id, @RequestBody Pet pet){
+        PetDTO p = service.update(pet, id);
+        return p != null ?
+                ResponseEntity.ok(p) :
+                ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
