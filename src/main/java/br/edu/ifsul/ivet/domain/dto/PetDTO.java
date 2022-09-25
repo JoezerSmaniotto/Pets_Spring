@@ -8,7 +8,15 @@ import org.modelmapper.ModelMapper;
 public class PetDTO {
     private Long id;
     private  String nome;
+    private String descricao;
+    private String raca;
+    private String urlFoto;
+    private String urlVideo;
+    private String latitude;
+    private String longitude;
     private String tipo;
+
+
 
     /*public PetDTO(Pet p){ // APAGAR ESTE QUANDO ADICIONAR O  ModelMapper
         this.id = p.getId();

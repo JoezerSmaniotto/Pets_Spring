@@ -15,5 +15,12 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Faz com que quando salvar um novo pet, um auto incremento no id
     private Long id;
     private  String nome;
+    private String descricao;
+    private String raca;
+    private String urlFoto;
+    private String urlVideo;
+    private String latitude;
+    private String longitude;
     private String tipo;
+
 }

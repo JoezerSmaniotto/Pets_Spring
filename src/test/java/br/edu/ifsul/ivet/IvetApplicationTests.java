@@ -29,7 +29,7 @@ class IvetApplicationTests {
     @Autowired
     private PetService service;
     @Test
-    public void test1() {
+    public void testSave() {
         Pet pet = new Pet();
         pet.setNome("Trovao");
         pet.setTipo("cao");
@@ -55,6 +55,28 @@ class IvetApplicationTests {
         // Verificar se deletou
         assertFalse(service.getPetById(id).isPresent());  // Verifica se deletou o Pet do banco.
 
+    }
+    @Test
+    public void testLista() {
+        List<PetDTO> pets = service.getPets();
+        assertEquals(6, pets.size() );
+    }
+
+    @Test
+    public void testListaPorTipo() {
+        assertEquals(3, service.getPetsByTipo("gato").size() );
+        assertEquals(3, service.getPetsByTipo("cao").size() );
+
+        assertEquals(0, service.getPetsByTipo("x").size() );
+
+    }
+
+    @Test
+    public void testGet() {
+        Optional<PetDTO> op = service.getPetById(2L);
+        assertNotNull(op);
+        PetDTO p = op.get();
+        assertEquals("Bigo", p.getNome());
     }
 
 }
