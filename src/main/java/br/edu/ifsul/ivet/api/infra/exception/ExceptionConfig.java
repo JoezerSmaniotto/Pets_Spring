@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.security.access.AccessDeniedException;
 
 import java.io.Serializable;
+
+
 
 
 @RestControllerAdvice // Classe que trata exeções, ela intercepta eventos de rest, inclusive as exeções,  e trata de forma generica.
@@ -34,6 +37,13 @@ public class ExceptionConfig extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>( new ExceptionError("Operação não permitida"), HttpStatus.METHOD_NOT_ALLOWED);
     }
 
+    @ExceptionHandler({
+            AccessDeniedException.class
+    })
+    public ResponseEntity accessDenied() {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Error("Acesso negado"));
+    }
+
 }
 
 class ExceptionError implements Serializable {
@@ -44,5 +54,12 @@ class ExceptionError implements Serializable {
     public String getError(){
         return error;
     }
+}
 
+class Error {
+    public String error;
+
+    public Error(String error){
+        this.error = error;
+    }
 }
