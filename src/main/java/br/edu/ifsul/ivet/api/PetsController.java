@@ -46,14 +46,10 @@ public class PetsController {
 
     @PostMapping
     public ResponseEntity post(@RequestBody Pet pet){
-        try{
-            PetDTO p = service.insert(pet);
-            URI location = getUri(p.getId());
-            return ResponseEntity.created(location).build();
-        } catch (Exception ex){
-            return ResponseEntity.badRequest().build();
-        }
 
+        PetDTO p = service.insert(pet);
+        URI location = getUri(p.getId());
+        return ResponseEntity.created(location).build();
     }
 
     private URI getUri(Long id) {
