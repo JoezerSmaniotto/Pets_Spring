@@ -43,6 +43,12 @@
             <version>2.3.0</version>
         </dependency>
 
+        <!-- Security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <!-- JPA  MARIADB MYSQL-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
