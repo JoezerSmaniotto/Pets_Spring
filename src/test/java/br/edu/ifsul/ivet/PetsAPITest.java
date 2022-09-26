@@ -1,8 +1,8 @@
 package br.edu.ifsul.ivet;
 
-import br.edu.ifsul.ivet.domain.Pet;
-import br.edu.ifsul.ivet.domain.PetService;
-import br.edu.ifsul.ivet.domain.dto.PetDTO;
+import br.edu.ifsul.ivet.api.pets.Pet;
+import br.edu.ifsul.ivet.api.pets.PetService;
+import br.edu.ifsul.ivet.api.pets.PetDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,6 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
-
-import static junit.framework.TestCase.*;
 
 
 @RunWith(SpringRunner.class)

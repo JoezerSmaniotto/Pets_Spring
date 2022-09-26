@@ -1,7 +1,6 @@
-package br.edu.ifsul.ivet.domain;
+package br.edu.ifsul.ivet.api.pets;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 //  PetRepository Irá de comunicar com o banco de dados

@@ -1,17 +1,12 @@
-package br.edu.ifsul.ivet.api;
+package br.edu.ifsul.ivet.api.pets;
 
-import br.edu.ifsul.ivet.domain.Pet;
-import br.edu.ifsul.ivet.domain.PetService;
-import br.edu.ifsul.ivet.domain.dto.PetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController // converter essa classe em um web service.
 @RequestMapping("/api/v1/pets") // O RequestMapping mapeia o  web service, neste caso para o  "/" raiz do projeto.

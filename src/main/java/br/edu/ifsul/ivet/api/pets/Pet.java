@@ -1,4 +1,4 @@
-package br.edu.ifsul.ivet.domain;
+package br.edu.ifsul.ivet.api.pets;
 
 import lombok.*;
 

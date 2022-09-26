@@ -1,9 +1,9 @@
 package br.edu.ifsul.ivet;
 
-import br.edu.ifsul.ivet.api.exception.ObjectNotFoundException;
-import br.edu.ifsul.ivet.domain.Pet;
-import br.edu.ifsul.ivet.domain.PetService;
-import br.edu.ifsul.ivet.domain.dto.PetDTO;
+import br.edu.ifsul.ivet.api.infra.exception.ObjectNotFoundException;
+import br.edu.ifsul.ivet.api.pets.Pet;
+import br.edu.ifsul.ivet.api.pets.PetService;
+import br.edu.ifsul.ivet.api.pets.PetDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-
-import java.util.Optional;
 
 import static junit.framework.TestCase.*;
 

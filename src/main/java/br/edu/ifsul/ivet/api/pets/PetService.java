@@ -1,12 +1,10 @@
-package br.edu.ifsul.ivet.domain;
+package br.edu.ifsul.ivet.api.pets;
 
-import br.edu.ifsul.ivet.api.exception.ObjectNotFoundException;
-import br.edu.ifsul.ivet.domain.dto.PetDTO;
+import br.edu.ifsul.ivet.api.infra.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

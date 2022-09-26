@@ -1,6 +1,5 @@
-package br.edu.ifsul.ivet.domain.dto;
+package br.edu.ifsul.ivet.api.pets;
 
-import br.edu.ifsul.ivet.domain.Pet;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 
