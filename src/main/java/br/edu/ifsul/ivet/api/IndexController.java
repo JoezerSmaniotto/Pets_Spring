@@ -1,8 +1,8 @@
 package br.edu.ifsul.ivet.api;
 
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.core.annotation.AuthenticationPrincipal;
-//import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,9 +19,9 @@ public class IndexController {
 
 
     //UserDetails representa o usuário logado na sessão
-    /*@GetMapping("/user/userInfo")
+    @GetMapping("/userInfo") //Abaixo é injetado o UserDetails e retornado ele.
     public UserDetails userInfo(@AuthenticationPrincipal UserDetails user) {
         return user;
-    }*/
+    }
 
 }
