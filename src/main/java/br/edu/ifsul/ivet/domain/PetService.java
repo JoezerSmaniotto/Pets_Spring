@@ -1,5 +1,6 @@
 package br.edu.ifsul.ivet.domain;
 
+import br.edu.ifsul.ivet.api.exception.ObjectNotFoundException;
 import br.edu.ifsul.ivet.domain.dto.PetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,13 +27,9 @@ public class PetService {
        // return rep.findAll().stream().map(PetDTO::create).collect(Collectors.toList());
     }
 
-    public Optional<PetDTO> getPetById(Long id) { // Sintaxe Resumida  = Sintaxe não resumida
-        return rep.findById(id).map(PetDTO::create); // map(PetDTO::new); == map(p -> new PetDTO(p);
-        // o findByTipo sempre retorna uma Optional, mas como quero converter para um DTO, caso a conversão com map para DTO que quero, no caso de PetDTO
-        // Se existe aquele ID ele converte, se não ele segue sendo um DTO
-
-        //Optional<Pet> pet = rep.findById(id);
-        // return pet.map(p -> Optional.of(new PetDTO(p))).orElse(null);
+    public PetDTO getPetById(Long id) { // Sintaxe Resumida  = Sintaxe não resumida
+        Optional<Pet> carro = rep.findById(id);
+        return carro.map(PetDTO::create).orElseThrow(() -> new ObjectNotFoundException("Carro não encontrado"));
 
     }
 

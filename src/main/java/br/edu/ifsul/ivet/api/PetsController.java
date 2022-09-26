@@ -26,14 +26,8 @@ public class PetsController {
 
     @GetMapping("/{id}")// usa o "/" do mapeamento acima por default ao chamar essa página irá chamar o GetMapping, isso acontce pq apliquei o @GetMapping, neste caso ele herda ("/") feito no RequestMapping se eu não passar nada.
     public ResponseEntity get(@PathVariable("id") Long id){
-        Optional<PetDTO> pet = service.getPetById(id);
-        //Lambda
-        return pet.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-                       // Se Existe fazer  | Não existe retorna notFound
-
-        //return pet.isPresent() ?
-                //ResponseEntity.ok(pet.get()) : // o pet.get() é Pet que esta dentro do optional Seria assim => Pet p = pet.get();
-                //ResponseEntity.notFound().build();
+        PetDTO pet = service.getPetById(id);
+        return ResponseEntity.ok(pet);
     }
 
     @GetMapping("/tipo/{tipo}")// usa o "/" do mapeamento acima por default ao chamar essa página irá chamar o GetMapping, isso acontce pq apliquei o @GetMapping, neste caso ele herda ("/") feito no RequestMapping se eu não passar nada.
