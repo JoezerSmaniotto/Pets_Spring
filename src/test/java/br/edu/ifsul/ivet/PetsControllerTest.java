@@ -1,19 +1,16 @@
 package br.edu.ifsul.ivet;
 
 import br.edu.ifsul.ivet.api.pets.Pet;
-import br.edu.ifsul.ivet.api.pets.PetService;
 import br.edu.ifsul.ivet.api.pets.PetDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -24,23 +21,28 @@ import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = IvetApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PetsAPITest {
+class PetsControllerTest extends BaseAPITest {
 
-    @Autowired
-    protected TestRestTemplate rest;
+    //@Autowired
+    //protected TestRestTemplate rest;
 
-    @Autowired
-    private PetService service;
+    //@Autowired
+    //private PetService service;
+  
 
     private ResponseEntity<PetDTO> getPet(String url) {
-        return rest.withBasicAuth("user","123").getForEntity(url, PetDTO.class);
+        setupTest();
+        return get(url, PetDTO.class);
     }
 
     private ResponseEntity<List<PetDTO>>getPets(String url) {
-        return rest.withBasicAuth("user","123").exchange(
+        setupTest();
+        HttpHeaders headers = getHeaders();
+
+        return rest.exchange(
                 url,
                 HttpMethod.GET,
-                null,
+                new HttpEntity<>(headers),
                 new ParameterizedTypeReference<List<PetDTO>>() {
                 });
     }
@@ -48,13 +50,13 @@ class PetsAPITest {
 
     @Test
     public void testSave() {
-
+        setupTest();
         Pet pet = new Pet();
         pet.setNome("NewPet");
         pet.setTipo("cao");
 
         // Insert
-        ResponseEntity response = rest.withBasicAuth("admin","123").postForEntity("/api/v1/pets", pet, null);
+        ResponseEntity response = post("/api/v1/pets", pet, null);
         System.out.println(response);
 
         // Verifica se criou
@@ -69,7 +71,7 @@ class PetsAPITest {
         assertEquals("cao", c.getTipo());
 
         // Deletar o objeto
-        rest.withBasicAuth("user","123").delete(location);
+        delete(location, null);
 
         // Verificar se deletou
         assertEquals(HttpStatus.NOT_FOUND, getPet(location).getStatusCode());
@@ -77,6 +79,7 @@ class PetsAPITest {
 
     @Test
     public void testLista() { //OK
+        setupTest();
         List<PetDTO> pets = getPets("/api/v1/pets").getBody();
         assertNotNull(pets);
         assertEquals(6, pets.size());
@@ -84,27 +87,26 @@ class PetsAPITest {
 
     @Test
     public void testListaPorTipo() { //OK
-
+        setupTest();
         assertEquals(3, getPets("/api/v1/pets/tipo/cao").getBody().size());
         assertEquals(3, getPets("/api/v1/pets/tipo/gato").getBody().size());
-
-
         assertEquals(HttpStatus.NO_CONTENT, getPets("/api/v1/pets/tipo/xxx").getStatusCode());
     }
 
     @Test
     public void testGetOk() {//ok
-
+        setupTest();
         ResponseEntity<PetDTO> response = getPet("/api/v1/pets/1");
         assertEquals(response.getStatusCode(), HttpStatus.OK);
 
         PetDTO p = response.getBody();
+        assertNotNull(p);
         assertEquals("Onix", p.getNome());
     }
 
     @Test
     public void testGetNotFound() { //ok
-
+        setupTest();
         ResponseEntity response = getPet("/api/v1/pets/1100");
         assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
     }

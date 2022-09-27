@@ -47,7 +47,7 @@ class PetsServiceTest {
 
         // Verificar se deletou
        try{
-           assertNull(service.getPetById(id));  // Verifica se deletou o Pet do banco.
+           service.getPetById(id);  // Verifica se deletou o Pet do banco.
            fail("O carro não foi encontrado");
        }catch(ObjectNotFoundException e){
             //OK
