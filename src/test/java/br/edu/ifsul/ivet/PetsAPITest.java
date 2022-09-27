@@ -33,7 +33,7 @@ class PetsAPITest {
     private PetService service;
 
     private ResponseEntity<PetDTO> getPet(String url) {
-        return rest.getForEntity(url, PetDTO.class);
+        return rest.withBasicAuth("user","123").getForEntity(url, PetDTO.class);
     }
 
     private ResponseEntity<List<PetDTO>>getPets(String url) {
@@ -54,7 +54,7 @@ class PetsAPITest {
         pet.setTipo("cao");
 
         // Insert
-        ResponseEntity response = rest.postForEntity("/api/v1/pets", pet, null);
+        ResponseEntity response = rest.withBasicAuth("admin","123").postForEntity("/api/v1/pets", pet, null);
         System.out.println(response);
 
         // Verifica se criou
@@ -69,7 +69,7 @@ class PetsAPITest {
         assertEquals("cao", c.getTipo());
 
         // Deletar o objeto
-        rest.delete(location);
+        rest.withBasicAuth("user","123").delete(location);
 
         // Verificar se deletou
         assertEquals(HttpStatus.NOT_FOUND, getPet(location).getStatusCode());

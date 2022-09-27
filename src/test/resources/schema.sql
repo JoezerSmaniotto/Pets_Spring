@@ -1,3 +1,24 @@
+create table user (
+                      id bigint not null auto_increment,
+                      email varchar(255),
+                      login varchar(255),
+                      nome varchar(255),
+                      senha varchar(255),
+                      primary key (id)
+);
+
+create table role (
+                      id bigint not null auto_increment,
+                      nome varchar(255),
+                      primary key (id)
+);
+
+create table user_roles (
+                            user_id bigint not null,
+                            role_id bigint not null
+);
+
+
 create table pet
 (id bigint not null auto_increment,
  nome varchar(255),
