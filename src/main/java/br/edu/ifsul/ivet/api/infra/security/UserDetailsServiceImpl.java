@@ -1,4 +1,4 @@
-package br.edu.ifsul.ivet.api.infra.segurity;
+package br.edu.ifsul.ivet.api.infra.security;
 
 import br.edu.ifsul.ivet.api.user.User;
 import br.edu.ifsul.ivet.api.user.UserRepository;
