@@ -19,9 +19,9 @@ public class IndexController {
 
 
     //UserDetails representa o usuário logado na sessão
-    @GetMapping("/userInfo") //Abaixo é injetado o UserDetails e retornado ele.
-    public UserDetails userInfo(@AuthenticationPrincipal UserDetails user) {
-        return user;
-    }
+    //@GetMapping("/userInfo") //Abaixo é injetado o UserDetails e retornado ele.
+    //public UserDetails userInfo(@AuthenticationPrincipal UserDetails user) {
+     //   return user;
+    //}
 
 }
