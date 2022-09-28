@@ -1,9 +1,11 @@
 package br.edu.ifsul.ivet.api.pets;
 
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.modelmapper.ModelMapper;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PetDTO {
     private Long id;
     private String nome;
