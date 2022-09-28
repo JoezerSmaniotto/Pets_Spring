@@ -37,12 +37,12 @@ public class ExceptionConfig extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>( new ExceptionError("Operação não permitida"), HttpStatus.METHOD_NOT_ALLOWED);
     }
 
-    @ExceptionHandler({
-            AccessDeniedException.class
-    })
-    public ResponseEntity accessDenied() {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Error("Acesso negado"));
-    }
+    //@ExceptionHandler({
+    //        AccessDeniedException.class
+    //})
+    //public ResponseEntity accessDenied() {
+    //    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Error("Acesso negado"));
+    //}
 
 }
 
