@@ -54,6 +54,8 @@ class PetsControllerTest extends BaseAPITest {
         Pet pet = new Pet();
         pet.setNome("NewPet");
         pet.setTipo("cao");
+        pet.setRaca("pitbull");
+        pet.setDescricao("Docil e saudavel");
 
         // Insert
         ResponseEntity response = post("/api/v1/pets", pet, null);
@@ -69,6 +71,8 @@ class PetsControllerTest extends BaseAPITest {
         assertNotNull(c);
         assertEquals("NewPet", c.getNome());
         assertEquals("cao", c.getTipo());
+        assertEquals("pitbull", c.getRaca());
+        assertEquals("Docil e saudavel", c.getDescricao());
 
         // Deletar o objeto
         delete(location, null);
