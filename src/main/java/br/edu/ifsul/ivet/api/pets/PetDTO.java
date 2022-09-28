@@ -11,10 +11,6 @@ public class PetDTO {
     private String nome;
     private String descricao;
     private String raca;
-    private String urlFoto;
-    private String urlVideo;
-    private String latitude;
-    private String longitude;
     private String tipo;
 
 
