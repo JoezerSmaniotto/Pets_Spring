@@ -63,6 +63,14 @@ public class PetsController {
 
     }
 
+    @GetMapping("/search")
+    public ResponseEntity search(@RequestParam("query") String query) {
+        List<PetDTO> carros = service.search(query);
+        return carros.isEmpty() ?
+                ResponseEntity.noContent().build() :
+                ResponseEntity.ok(carros);
+    }
+
 
     /*@GetMapping()
     public ResponseEntity<String> getIndex() {

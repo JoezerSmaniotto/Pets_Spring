@@ -8,4 +8,5 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
 
 
     List<Pet> findByTipo(String tipo);
+    List<Pet> findByNomeContaining(String query);
 }

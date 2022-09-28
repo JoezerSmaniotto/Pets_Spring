@@ -75,4 +75,8 @@ public class PetService {
     public void delete(Long id) {
         rep.deleteById(id);
     }
+
+    public List<PetDTO> search(String query) {
+        return rep.findByNomeContaining(query).stream().map(PetDTO::create).collect(Collectors.toList());
+    }
 }
