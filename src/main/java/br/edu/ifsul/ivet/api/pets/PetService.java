@@ -60,6 +60,8 @@ public class PetService {
             // Copiar as propriedades
             db.setNome(pet.getNome());
             db.setTipo(pet.getTipo());
+            db.setRaca(pet.getRaca());
+            db.setDescricao(pet.getDescricao());
             System.out.println("Pet id " + db.getId());
 
             // Atualiza o pet
